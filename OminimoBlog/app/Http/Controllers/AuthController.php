@@ -29,7 +29,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = $user->createToken('YourAppName')->plainTextToken;
+        $token = $user->createToken('ominimoblog')->plainTextToken;
 
         return response()->json([
             'user' => $user,
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $token = $user->createToken('YourAppName')->plainTextToken;
+            $token = $user->createToken('ominimoblog')->plainTextToken;
 
             return response()->json([
                 'user' => $user,
@@ -63,7 +63,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Logged out successfully']);
     }
