@@ -10,19 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // List all posts
     public function index()
     {
-        return Post::with('comments')->get();
+        return Post::with('comments')->orderBy('created_at', 'desc')->get();
     }
 
-    // Show a single post
+
     public function show($id)
     {
         return Post::with('comments')->findOrFail($id);
     }
 
-    // Store a new post
     public function store(Request $request)
     {
         $request->validate([
@@ -39,7 +37,6 @@ class PostController extends Controller
         return response()->json(['message' => 'Post created successfully!', 'post' => $post]);
     }
 
-    // Edit a post
     public function edit($id)
     {
         $post = Post::findOrFail($id);
@@ -50,7 +47,6 @@ class PostController extends Controller
         return response()->json($post);
     }
 
-    // Update a post
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -70,7 +66,6 @@ class PostController extends Controller
         return response()->json(['message' => 'Post updated successfully!', 'post' => $post]);
     }
 
-    // Delete a post
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
