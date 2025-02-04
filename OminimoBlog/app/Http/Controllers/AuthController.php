@@ -13,6 +13,15 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
+
+        return response()->json(['message' => 'Register function reached'], 200);
+
+        $token = $user->createToken('ominimoblog')->plainTextToken;
+
+        if (!$token) {
+            return response()->json(['error' => 'Token could not be created'], 500);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',

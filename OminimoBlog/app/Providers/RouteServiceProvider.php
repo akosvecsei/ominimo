@@ -7,16 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     *
-     * @var string
-     */
     protected $namespace = 'App\\Http\\Controllers';
 
-    /**
-     *
-     * @return void
-     */
     public function map()
     {
         $this->mapApiRoutes();
@@ -24,10 +16,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
     }
 
-    /**
-     *
-     * @return void
-     */
     public function mapWebRoutes()
     {
         Route::middleware('web')
@@ -35,10 +23,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    /**
-     *
-     * @return void
-     */
     public function mapApiRoutes()
     {
         Route::prefix('api')
